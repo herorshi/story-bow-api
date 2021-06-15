@@ -16,7 +16,9 @@ let db = {
          return await new Promise((resolve, reject)=>{
             pool.query(str,  (error, elements)=>{
                 if(error){
-                    return reject(error);
+                    resolve(false)
+                    console.log('ERROR');
+                    // return reject(error);
                 }
                 return resolve(elements);
             });

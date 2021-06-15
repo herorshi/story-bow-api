@@ -12,7 +12,26 @@ const Module = {
             const bearer = bearerHeader.split(" ");
             const bearerToken = bearer[1];
             req.token = bearerToken;
-            next()
+            
+            
+            jwt.verify(req.token,req.cookies.selt,function(err,data){
+                if(err){
+                    res.json({
+                        text:"Error",
+                        data:data
+                    })
+                }
+                else {
+                    next()
+                    // res.json({
+                    //     status:true,
+                    //     text:"this is protected",
+                    //     data:data
+                    // })
+                }
+            })
+            
+           
         }
         else {
             req.sendStatus(403);
